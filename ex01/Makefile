@@ -1,4 +1,4 @@
-CXX = g++
+CXX = c++
 
 NAME = phonebook
 
@@ -13,7 +13,7 @@ all: $(NAME)
 $(NAME): $(F_OBJ)
 		@$(CXX) $(CXXFLAGS) $(F_OBJ) -o $(NAME)
 
-%.o: %.cpp
+%.o: %.cpp phonebook.hpp
 		@$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean :
