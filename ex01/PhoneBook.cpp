@@ -1,5 +1,4 @@
-#include "phonebook.hpp"
-#include <iostream>
+#include "PhoneBook.hpp"
 
 void	prompt_field(int x)
 {
@@ -15,7 +14,11 @@ void	prompt_field(int x)
 		std::cout << "darkest secret: ";
 }
 
-void	get_data(PhoneBook &myPhone, string input, int index, int x)
+void PhoneBook::sett()
+{
+	int x = 2;
+}
+void	get_data(PhoneBook &myPhone, std::string input, int index, int x)
 {
 	if (x == 0)
 		myPhone.contact[index].setName(input);
@@ -36,8 +39,8 @@ int main()
 	int i;
 	int	index = 0;
 	int	updt_index = 0;
-	PhoneBook	myPhone;
-	
+	PhoneBook myPhone;
+
 	while (1)
 	{
 		std::getline(std::cin, arg);
@@ -71,11 +74,18 @@ int main()
 			int j = 0;
 			while (j < index)
 			{
+				if (j == 0)
+				{
+					std::cout << std::left << std::setw(10) << "index" << "|";
+					std::cout << std::left << std::setw(10) << "first Name" << "|";
+					std::cout << std::left << std::setw(10) << "last Name" << "|";
+					std::cout << std::left << std::setw(10) << "Nickname" << std::endl;
+				}
 				myPhone.contact[j].trunc_str();
-				std::cout << "index " << j << " |";
-				std::cout << myPhone.contact[j].getName() << " |";
-				std::cout << myPhone.contact[j].getlast_name() << " |";
-				std::cout << myPhone.contact[j].getnickname() << std::endl;
+				std::cout << std::left << std::setw(10) << j << "|";
+				std::cout << std::left << std::setw(10) << myPhone.contact[j].getName() << "|";
+				std::cout << std::left << std::setw(10) << myPhone.contact[j].getlast_name() << "|";
+				std::cout << std::left << std::setw(10) << myPhone.contact[j].getnickname() << std::endl;
 				j++;
 			}
 			int get = 0;
@@ -84,24 +94,27 @@ int main()
 				std::cout << "enter index: ";
 				if (!(std::cin >> get) || get >= index || get < 0)
 				{
+					
 					std::cin.clear();
 					std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 					std::cout << "Invalid Index" << std::endl;
 				}
 				else
+				{
+					prompt_field(0);
+					std::cout << myPhone.contact[get].getName() << std::endl;
+					prompt_field(1);
+					std::cout << myPhone.contact[get].getlast_name() << std::endl;
+					prompt_field(2);
+					std::cout << myPhone.contact[get].getnickname() << std::endl;
+					prompt_field(3);
+					std::cout << myPhone.contact[get].getphone_number() << std::endl;
+					prompt_field(4);
+					std::cout << myPhone.contact[get].getSecret() << std::endl;
 					break;
+				}
 			}
-				prompt_field(0);
-				std::cout << myPhone.contact[get].getName() << std::endl;
-				prompt_field(1);
-				std::cout << myPhone.contact[get].getlast_name() << std::endl;
-				prompt_field(2);
-				std::cout << myPhone.contact[get].getnickname() << std::endl;
-				prompt_field(3);
-				std::cout << myPhone.contact[get].getphone_number() << std::endl;
-				prompt_field(4);
-				std::cout << myPhone.contact[get].getSecret() << std::endl;
-			}
+		}
 			
 		} 
 }
