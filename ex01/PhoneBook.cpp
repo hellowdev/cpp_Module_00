@@ -14,108 +14,103 @@ void	prompt_field(int x)
 		std::cout << "darkest secret: ";
 }
 
-void PhoneBook::sett()
-{
-	int x = 2;
-}
-void	get_data(PhoneBook &myPhone, std::string input, int index, int x)
+void	set_data(Contact &contact, std::string input, int x)
 {
 	if (x == 0)
-		myPhone.contact[index].setName(input);
+		contact.setName(input);
 	else if (x == 1)
-		myPhone.contact[index].setlast_name(input);
+		contact.setlast_name(input);
 	else if (x == 2)
-		myPhone.contact[index].setnickname(input);
+		contact.setnickname(input);
 	else if (x == 3)
-		myPhone.contact[index].setphone_number(input);
+		contact.setphone_number(input);
 	else if (x == 4)
-		myPhone.contact[index].setSecret(input);
+		contact.setSecret(input);
 }
 
-int main()
+void PhoneBook::add(int updt_index)
 {
-	std::string arg;
+	int i = 0;
 	std::string data;
-	int i;
-	int	index = 0;
-	int	updt_index = 0;
-	PhoneBook myPhone;
-
-	while (1)
+	while (i < 5)
 	{
-		std::getline(std::cin, arg);
-		if (arg.compare("EXIT") == 0)
-			break;
-		if (arg.compare("ADD") == 0)
+		prompt_field(i);
+		if (!std::getline(std::cin, data))
 		{
-			i = 0;
-			while (i < 5)
-			{
-				prompt_field(i);
-				std::getline(std::cin, data);
-				while (data.empty())
-				{
-					std::cout << "Fill The Field\n";
-					prompt_field(i);
-					std::getline(std::cin, data);
-				}
-				get_data(myPhone, data, updt_index, i);
-				i++;
-			}
-			updt_index++;
-			if (index < 8)
-				index++;
-			if (updt_index > 7)
-				updt_index = 0;
-			std::cout << "<< SAVED NEW CONTACT >>" << std::endl;
+			std::cout << std::endl;
+			return ;
 		}
-		if (arg.compare("SEARCH") == 0)
+		while (data.empty())
 		{
-			int j = 0;
-			while (j < index)
+			std::cout << "Fill The Field\n";
+			prompt_field(i);
+			if (!std::getline(std::cin, data))
 			{
-				if (j == 0)
-				{
-					std::cout << std::left << std::setw(10) << "index" << "|";
-					std::cout << std::left << std::setw(10) << "first Name" << "|";
-					std::cout << std::left << std::setw(10) << "last Name" << "|";
-					std::cout << std::left << std::setw(10) << "Nickname" << std::endl;
-				}
-				myPhone.contact[j].trunc_str();
-				std::cout << std::left << std::setw(10) << j << "|";
-				std::cout << std::left << std::setw(10) << myPhone.contact[j].getName() << "|";
-				std::cout << std::left << std::setw(10) << myPhone.contact[j].getlast_name() << "|";
-				std::cout << std::left << std::setw(10) << myPhone.contact[j].getnickname() << std::endl;
-				j++;
-			}
-			int get = 0;
-			while (1)
-			{
-				std::cout << "enter index: ";
-				if (!(std::cin >> get) || get >= index || get < 0)
-				{
-					
-					std::cin.clear();
-					std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-					std::cout << "Invalid Index" << std::endl;
-				}
-				else
-				{
-					prompt_field(0);
-					std::cout << myPhone.contact[get].getName() << std::endl;
-					prompt_field(1);
-					std::cout << myPhone.contact[get].getlast_name() << std::endl;
-					prompt_field(2);
-					std::cout << myPhone.contact[get].getnickname() << std::endl;
-					prompt_field(3);
-					std::cout << myPhone.contact[get].getphone_number() << std::endl;
-					prompt_field(4);
-					std::cout << myPhone.contact[get].getSecret() << std::endl;
-					break;
-				}
+				std::cout << std::endl;
+				return ;
 			}
 		}
-			
-		} 
+		set_data(contact[updt_index], data, i);
+		i++;
+	}
+	if (index < 8)
+		index++;
+	std::cout << "<< SAVED NEW CONTACT >>" << std::endl;
 }
+
+void PhoneBook::search_table()
+{
+	int j = 0;
+	if (j == index)
+		std::cout << "Empty Data" << std::endl;
+	while (j < index)
+	{
+		if (j == 0)
+		{
+			std::cout << std::left << std::setw(10) << "index" << "|";
+			std::cout << std::left << std::setw(10) << "first Name" << "|";
+			std::cout << std::left << std::setw(10) << "last Name" << "|";
+			std::cout << std::left << std::setw(10) << "Nickname" << std::endl;
+		}
+		contact[j].trunc_str();
+		std::cout << std::left << std::setw(10) << j << "|";
+		std::cout << std::left << std::setw(10) << contact[j].getName() << "|";
+		std::cout << std::left << std::setw(10) << contact[j].getlast_name() << "|";
+		std::cout << std::left << std::setw(10) << contact[j].getnickname() << std::endl;
+		j++;
+	}
+}
+
+void PhoneBook::get_info()
+{
+	std::string in;
+	int			num;
+	while (index)
+	{
+		std::cout << "enter index: ";
+		if (!std::getline(std::cin, in))
+		{
+			std::cout << std::endl;
+			return ;
+		}
+		if (std::isdigit(in[0]) && in.length() == 1 && std::atoi(in.c_str()) < index)
+			break;
+		std::cout << "Invalid Index" << std::endl;
+	}
+	if (index)
+	{
+		num = std::atoi(in.c_str());
+		prompt_field(0);
+		std::cout << contact[num].getName() << std::endl;
+		prompt_field(1);
+		std::cout << contact[num].getlast_name() << std::endl;
+		prompt_field(2);
+		std::cout << contact[num].getnickname() << std::endl;
+		prompt_field(3);
+		std::cout << contact[num].getphone_number() << std::endl;
+		prompt_field(4);
+		std::cout << contact[num].getSecret() << std::endl;
+	}
+}
+
 	

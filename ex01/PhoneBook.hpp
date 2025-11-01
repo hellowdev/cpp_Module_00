@@ -9,10 +9,13 @@
 class PhoneBook
 {
 	private:
+		int		index;
 		Contact contact[8];
 	public:
 		PhoneBook(){}
-		void sett();
-	
+		~PhoneBook(){}
+		void add(int updt_index);
+		void search_table();
+		void get_info();
 };
 
