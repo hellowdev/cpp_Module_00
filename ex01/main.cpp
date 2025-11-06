@@ -1,5 +1,5 @@
 #include "PhoneBook.hpp"
-#include <fstream>
+
 int main()
 {
 	std::string arg;
@@ -7,6 +7,7 @@ int main()
 	int updt_index = 0;
 	while (1)
 	{
+		std::cout << "choose ADD or SEARCH or EXIT: ";
 		if (!std::getline(std::cin, arg))
 		{
 			std::cout << std::endl;

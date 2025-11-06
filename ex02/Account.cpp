@@ -33,10 +33,12 @@ int Account::checkAmount()const
 void Account::_displayTimestamp()
 {
 	time_t now;
+	char buffer[16];
 	struct tm *date; // declare var to hold data of time 
 	time(&now); // get current time in sec
 	date = localtime(&now); // this function set the date struct with each current format-date
-    std::cout << "[" << std::put_time(date, "%Y%m%d_%H%M%S") << "] ";
+    std::strftime(buffer, sizeof(buffer), "%Y%m%d_%H%M%S", date);
+	std::cout << "[" <<  buffer << "] ";
 }
 
 bool Account::makeWithdrawal(int withdrawal)

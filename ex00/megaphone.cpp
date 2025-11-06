@@ -1,6 +1,5 @@
 #include <iostream>
 
-
 int main(int ac, char *av[])
 {
 	int i = 1;
@@ -8,7 +7,7 @@ int main(int ac, char *av[])
 
 	if (ac == 1)
 	{
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
+		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << '\n';
 		return (0);
 	}
 	while (av[i])
@@ -26,8 +25,6 @@ int main(int ac, char *av[])
 	while (av[i])
 	{
 		std::cout << av[i];
-		if (i + 1 != ac)
-			std::cout << " ";
 		i++;
 	}
 	std::cout << '\n';
