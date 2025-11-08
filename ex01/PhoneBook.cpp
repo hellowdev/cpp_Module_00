@@ -72,11 +72,8 @@ void PhoneBook::search_table()
 			std::cout << std::left << std::setw(10) << "last Name" << "|";
 			std::cout << std::left << std::setw(10) << "Nickname" << std::endl;
 		}
-		contact[j].trunc_str();
 		std::cout << std::left << std::setw(10) << j << "|";
-		std::cout << std::left << std::setw(10) << contact[j].getName() << "|";
-		std::cout << std::left << std::setw(10) << contact[j].getlast_name() << "|";
-		std::cout << std::left << std::setw(10) << contact[j].getnickname() << std::endl;
+		contact[j].trunc_str();
 		j++;
 	}
 }

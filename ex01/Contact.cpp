@@ -1,19 +1,26 @@
 #include "Contact.hpp"
+#include <iostream>
+#include <iomanip>
+
 
 void Contact::trunc_str()
 {
-    if (first_name.size() > 9)
-      first_name.replace(9, first_name.size() - 9, ".");
-    if (last_name.size() > 9)
-      last_name.replace(9, last_name.size() - 9, ".");
-    if (nickname.size() > 9)
-      nickname.replace(9, nickname.size() - 9, ".");
-    if (phone_number.size() > 9)
-      phone_number.replace(9, phone_number.size() - 9, ".");
-    if (darkest_secret.size() > 9)
-      darkest_secret.replace(9, darkest_secret.size() - 9, ".");
-		
+	std::string in;
+	
+	in = getName();
+    if (first_name.size() > 10)
+    	in.replace(9, in.size() - 9, ".");
+	std::cout << std::left << std::setw(10) << in << "|";
+	in = getlast_name();
+    if (last_name.size() > 10)
+    	in.replace(9, in.size() - 9, ".");
+	std::cout << std::left << std::setw(10) << in << "|";
+	in = getnickname();
+    if (nickname.size() > 10)
+      	in.replace(9, in.size() - 9, ".");
+	std::cout << std::left << std::setw(10) << in << std::endl;
 }
+
 void	Contact::setName(std::string f_name)
 {
 	first_name = f_name;

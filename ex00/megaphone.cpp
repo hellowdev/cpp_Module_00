@@ -15,8 +15,7 @@ int main(int ac, char *av[])
 		j = 0;
 		while (av[i][j])
 		{
-			if (std::islower(av[i][j]))
-				av[i][j] = std::toupper(av[i][j]);
+			av[i][j] = std::toupper(av[i][j]);
 			j++;
 		}
 		i++;
